@@ -1,0 +1,43 @@
+<%= render "shared/header" %>
+<div class='main'>
+
+  <div class='title-contents'>
+    <h2 class='service-title'>
+      みんなのための情報サイト
+    </h2>
+    <p class='service-explain'>
+      おすすめゲームを紹介してください
+    </p>
+  </div>
+
+  <div class='game-contents'>
+    <h2 class='title'>投稿一覧</h2>
+    <%= link_to '新規投稿作品', new_game_path, class: "subtitle" %>
+    <ul class='game-lists'>
+
+      <% @game.each do |game| %>
+      <li class='list'>
+        <%= link_to game_path(game.id) do %>
+        <div class='game-img-content'>
+          <%= image_tag game.image, class: "game-img" %>
+        </div>
+        <div class='game-info'>
+          <h3 class='game-name'>
+            <%= game.name %>
+          </h3>
+          <div class='star-btn'>
+            <%= image_tag "star.png", class:"star-icon" %>
+            <span class='star-count'>0</span>
+          </div>
+        </div>
+        <% end %>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<%= link_to(new_game_path, class: 'post-btn') do %>
+  <span class='post-btn-text'>投稿する</span>
+  <%= image_tag 'icon_camera.png' , size: '185x50' ,class: "post-btn-icon" %>
+<% end %>
+<%= render "shared/footer" %>

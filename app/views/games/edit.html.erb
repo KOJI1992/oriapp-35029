@@ -1,0 +1,74 @@
+<div class="games-contents">
+  <header class="games-header">
+    <%= link_to image_tag('title-logo.png' , size: '185x50'), "/" %>
+  </header>
+  <div class="games-main">
+    <h2 class="games-title">作品の情報を入力</h2>
+    <%= form_with model:@game, local: true do |f| %>
+
+    <%= render 'shared/error_messages', model: f.object %>
+
+    <div class="img-upload">
+      <div class="weight-bold-text">
+        作品画像
+        <span class="indispensable">必須</span>
+      </div>
+      <div class="click-upload">
+        <p>
+          クリックしてファイルをアップロード
+        </p>
+        <%= f.file_field :image, id:"game-image" %>
+      </div>
+    </div>
+
+    <div class="new-games">
+      <div class="weight-bold-text">
+        作品名
+        <span class="indispensable">必須</span>
+      </div>
+      <%= f.text_area :name, class:"games-text", id:"game-name", placeholder:"商品名（必須 40文字まで)", maxlength:"40" %>
+      <div class="games-explain">
+        <div class="weight-bold-text">
+          作品の説明
+          <span class="indispensable">必須</span>
+        </div>
+        <%= f.text_area :info, class:"games-text", id:"game-info", placeholder:"商品の説明（必須 1,000文字まで）" ,rows:"7" ,maxlength:"1000" %>
+      </div>
+      <div class="games-explain">
+        <div class="weight-bold-text">
+          作品の良い点
+          <span class="indispensable">必須</span>
+        </div>
+        <%= f.text_area :good, class:"games-text", id:"game-info", placeholder:"商品の説明（必須 1,000文字まで）" ,rows:"7" ,maxlength:"1000" %>
+      </div>
+      <div class="games-explain">
+        <div class="weight-bold-text">
+          作品の気になる点
+          <span class="indispensable">必須</span>
+        </div>
+        <%= f.text_area :bad, class:"games-text", id:"game-info", placeholder:"商品の説明（必須 1,000文字まで）" ,rows:"7" ,maxlength:"1000" %>
+      </div>
+    </div>
+
+    <div class="games-detail">
+      <div class="weight-bold-text">評価点</div>
+      <div class="form">
+        <div class="weight-bold-text">
+          ５段階評価
+          <span class="indispensable">必須</span>
+        </div>
+        <%= f.collection_select(:review_id, Review.all, :id, :name, {}, {class:"select-box", id:"game-category"}) %>
+      </div>
+    </div>
+
+    <div class="game-btn-contents">
+      <%= f.submit "変更する" ,class:"game-btn" %>
+      <%=link_to 'もどる', game_path(@game.id), class:"back-btn" %>
+    </div>
+  </div>
+  <% end %>
+
+  <footer class="games-footer">
+    <%= link_to image_tag('title-logo.png' , size: '185x50'), "/" %>
+  </footer>
+</div>

@@ -1,0 +1,65 @@
+<%= render "shared/header" %>
+
+<div class="game-show">
+  <div class="game-box">
+    <h2 class="name">
+      <%= @game.name %>
+    </h2>
+    <div class="game-img-content">
+      <%= image_tag @game.image ,class:"game-box-img" %>
+    </div>
+
+    <% if user_signed_in? && current_user.id == @game.user_id %>
+      <%= link_to "作品の編集", edit_game_path(@game.id), method: :get, class: "game-red-btn" %>
+      <p class="or-text">or</p>
+      <%= link_to "削除", game_path(@game.id), method: :delete, class:"game-destroy" %>
+    <% end %>
+
+    <table class="detail-table">
+      <tbody>
+        <tr>
+          <th class="detail-game">ゲーム概要</th>
+          <td class="detail-value"><%= @game.info %></td>
+        </tr>
+        <tr>
+          <th class="detail-game">投稿者</th>
+          <td class="detail-value"><%= @game.user.nickname %></td>
+        </tr>
+        <tr>
+          <th class="detail-game">お勧めポイント</th>
+          <td class="detail-value"><%= @game.good %></td>
+        </tr>
+        <tr>
+          <th class="detail-game">気になる点</th>
+          <td class="detail-value"><%= @game.bad %></td>
+        </tr>
+        <tr>
+          <th class="detail-game">評価</th>
+          <td class="detail-value"><%= @game.review.name %></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="option">
+      <div class="favorite-btn">
+        <%= image_tag "star.png" ,class:"favorite-star-icon" ,width:"20",height:"20"%>
+        <span>お気に入り 0</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="comment-box">
+    <form>
+      <textarea class="comment-text"></textarea>
+      <p class="comment-warn">
+        相手のことを考えコメントをしましょう。
+      </p>
+      <button type="submit" class="comment-btn">
+        <%= image_tag "comment.png" ,class:"comment-flag-icon" ,width:"20",height:"25"%>
+        <span>コメントする<span>
+      </button>
+    </form>
+  </div>
+  <a href="#" class="another-game"><%= "この投稿者の投稿作品" %>をもっと見る</a>
+</div>
+
+<%= render "shared/footer" %>
